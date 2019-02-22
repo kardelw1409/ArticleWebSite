@@ -14,7 +14,7 @@ namespace ArticlesSite.Context
 
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Person> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Article> Articles { get; set; }
 

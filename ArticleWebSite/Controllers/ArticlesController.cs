@@ -38,7 +38,7 @@ namespace ArticleWebSite.Controllers
 
         // PUT: api/Articles/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutArticle(string id, Article article)
+        public IHttpActionResult PutArticle(int id, Article article)
         {
             if (!ModelState.IsValid)
             {
@@ -86,6 +86,28 @@ namespace ArticleWebSite.Controllers
             {
                 db.SaveChanges();
             }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                Exception raise = dbEx;
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        string message = string.Format("{0}:{1}",
+                            validationErrors.Entry.Entity.ToString(),
+                            validationError.ErrorMessage);
+                        // raise a new exception nesting
+                        // the current instance as InnerException
+                        raise = new InvalidOperationException(message, raise);
+                    }
+                }
+                throw raise;
+            }
+
+            /*try
+            {
+                db.SaveChanges();
+            }
             catch (DbUpdateException)
             {
                 if (ArticleExists(article.ArticleId))
@@ -96,7 +118,7 @@ namespace ArticleWebSite.Controllers
                 {
                     throw;
                 }
-            }
+            }*/
 
             return CreatedAtRoute("DefaultApi", new { id = article.ArticleId }, article);
         }
@@ -126,7 +148,7 @@ namespace ArticleWebSite.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ArticleExists(string id)
+        private bool ArticleExists(int id)
         {
             return db.Articles.Count(e => e.ArticleId == id) > 0;
         }

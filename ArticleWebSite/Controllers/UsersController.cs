@@ -18,16 +18,16 @@ namespace ArticleWebSite.Controllers
         private SiteDbContext db = new SiteDbContext();
 
         // GET: api/Users
-        public IQueryable<User> GetUsers()
+        public IQueryable<Person> GetUsers()
         {
             return db.Users;
         }
 
         // GET: api/Users/5
-        [ResponseType(typeof(User))]
+        [ResponseType(typeof(Person))]
         public IHttpActionResult GetUser(int id)
         {
-            User user = db.Users.Find(id);
+            Person user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
@@ -38,7 +38,7 @@ namespace ArticleWebSite.Controllers
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, User user)
+        public IHttpActionResult PutUser(int id, Person user)
         {
             if (!ModelState.IsValid)
             {
@@ -72,8 +72,8 @@ namespace ArticleWebSite.Controllers
         }
 
         // POST: api/Users
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
+        [ResponseType(typeof(Person))]
+        public IHttpActionResult PostUser(Person user)
         {
             if (!ModelState.IsValid)
             {
@@ -87,10 +87,10 @@ namespace ArticleWebSite.Controllers
         }
 
         // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
+        [ResponseType(typeof(Person))]
         public IHttpActionResult DeleteUser(int id)
         {
-            User user = db.Users.Find(id);
+            Person user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();

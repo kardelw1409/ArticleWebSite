@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ArticleWebSite.Context
 {
-    public class AuthDbContext : IdentityDbContext<UserModel>
+    public class AuthDbContext : IdentityDbContext<IdentityUser>
     {
         public AuthDbContext(): base()
         {

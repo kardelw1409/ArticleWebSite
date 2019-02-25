@@ -1,4 +1,5 @@
 ﻿using ArticleWebSite.Context;
+using ArticleWebSite.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace ArticleWebSite.Models
+namespace ArticleWebSite.Services
 {
     public class AuthRepository : IDisposable
 	    {

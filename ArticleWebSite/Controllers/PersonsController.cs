@@ -13,44 +13,44 @@ using ArticlesSite.Models;
 
 namespace ArticleWebSite.Controllers
 {
-    public class UsersController : ApiController
+    public class PersonsController : ApiController
     {
         private SiteDbContext db = new SiteDbContext();
 
         // GET: api/Users
-        public IQueryable<Person> GetUsers()
+        public IQueryable<Person> GetPersons()
         {
-            return db.Users;
+            return db.Persons;
         }
 
         // GET: api/Users/5
         [ResponseType(typeof(Person))]
-        public IHttpActionResult GetUser(int id)
+        public IHttpActionResult GetPerson(int id)
         {
-            Person user = db.Users.Find(id);
-            if (user == null)
+            Person person = db.Persons.Find(id);
+            if (person == null)
             {
                 return NotFound();
             }
 
-            return Ok(user);
+            return Ok(person);
         }
 
         // PUT: api/Users/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutUser(int id, Person user)
+        public IHttpActionResult PutPerson(int id, Person person)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != user.Id)
+            if (id != person.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
+            db.Entry(person).State = EntityState.Modified;
 
             try
             {
@@ -58,7 +58,7 @@ namespace ArticleWebSite.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!PersonExists(id))
                 {
                     return NotFound();
                 }
@@ -73,33 +73,33 @@ namespace ArticleWebSite.Controllers
 
         // POST: api/Users
         [ResponseType(typeof(Person))]
-        public IHttpActionResult PostUser(Person user)
+        public IHttpActionResult PostPerson(Person person)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Users.Add(user);
+            db.Persons.Add(person);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
+            return CreatedAtRoute("DefaultApi", new { id = person.Id }, person);
         }
 
         // DELETE: api/Users/5
         [ResponseType(typeof(Person))]
-        public IHttpActionResult DeleteUser(int id)
+        public IHttpActionResult DeletePerson(int id)
         {
-            Person user = db.Users.Find(id);
-            if (user == null)
+            Person person = db.Persons.Find(id);
+            if (person == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.Persons.Remove(person);
             db.SaveChanges();
 
-            return Ok(user);
+            return Ok(person);
         }
 
         protected override void Dispose(bool disposing)
@@ -111,9 +111,9 @@ namespace ArticleWebSite.Controllers
             base.Dispose(disposing);
         }
 
-        private bool UserExists(int id)
+        private bool PersonExists(int id)
         {
-            return db.Users.Count(e => e.Id == id) > 0;
+            return db.Persons.Count(e => e.Id == id) > 0;
         }
     }
 }

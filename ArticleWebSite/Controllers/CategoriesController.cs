@@ -13,6 +13,7 @@ using ArticlesSite.Models;
 
 namespace ArticleWebSite.Controllers
 {
+    [Authorize]
     public class CategoriesController : ApiController
     {
         private SiteDbContext db = new SiteDbContext();

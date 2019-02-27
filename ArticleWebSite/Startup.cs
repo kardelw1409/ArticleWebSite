@@ -17,6 +17,9 @@ namespace ArticlesSite
         {
             ConfigureOAuth(app);
             HttpConfiguration config = new HttpConfiguration();
+            config.Formatters.JsonFormatter
+            .SerializerSettings
+            .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             WebApiConfig.Register(config);
             app.UseWebApi(config);
         }
